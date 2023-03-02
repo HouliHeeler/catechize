@@ -95,3 +95,29 @@ main {
 .card--answers {
   margin: 0 3rem;
 }
+
+.card--answers > ul {
+  display: flex;
+  flex-direction: column;
+}
+
+.card--answers > ul > li {
+  margin-bottom: .5rem;
+  cursor: pointer;
+}
+
+.One {
+  order: 1;
+}
+
+.Two {
+  order: 3;
+}
+
+.Three {
+  order: 5;
+}
+
+.Four {
+  order: 7;
+}
