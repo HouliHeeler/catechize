@@ -1,22 +1,30 @@
 import { useEffect, useState } from 'react'
-import { FaCheck, FaSkullCrossbones } from 'react-icons/fa';
 import StartQuiz from './StartQuiz';
 import EndQuiz from './EndQuiz.js';
+import QuestionBlock from './QuestionBlock';
+import ResultSpan from './ResultSpan';
 
 function TriviaCard() {
-
-    const randomNumber = Math.ceil(Math.random() * 4)
 
     const [questions, setQuestions] = useState([])
 
     const [questionNumber, setQuestionNumber] = useState(0)
 
-    const [result, setResult] = useState('')
+    const [result, setResult] = useState({
+        text: "",
+        total: 0
+    })
 
     const [status, setStatus] = useState('Start')
 
     function handleClick(e) {
-        setResult(e.target.id)
+        setResult({...result, text:e.target.id})
+        if(e.target.id === 'Correct') {
+            setResult(prevResult => ({
+                text: 'Correct',
+                total: prevResult.total + 1
+            }))
+        }
         setQuestionNumber(prevNumber => prevNumber+1)
         if(questionNumber !== questions.length - 1) {
             setStatus("Ongoing")
@@ -53,44 +61,18 @@ function TriviaCard() {
       getQuestions()
     }, [])
 
-    const questionBlock = questions.map((item, index) => {
-      return(
-        <section className="card--body" key={index}>
-          <div className="card--question">{item.question}</div>
-          <div className="card--answers">
-            <ul>
-                <li id='Incorrect' style={{order: 2}} onClick={handleClick}>{item.incorrectAnswers[0]}</li>
-                <li id='Incorrect' style={{order: 4}} onClick={handleClick}>{item.incorrectAnswers[1]}</li>
-                <li id='Incorrect' style={{order: 6}} onClick={handleClick}>{item.incorrectAnswers[2]}</li>
-                <li 
-                    id='Correct'
-                    onClick={handleClick}
-                    className={randomNumber === 1 ? "One" : 
-                               randomNumber === 2 ? "Two" : 
-                               randomNumber === 3 ? "Three" : "Four"}>
-                                    {item.correctAnswer}
-                </li>
-            </ul>
-          </div>
-        </section>
-      )
-    })
-
     return (
       <section className="trivia--card">
         <div className="card--header">Trivia!</div>
-        {status === 'Ongoing' ? questionBlock[questionNumber] : status === "Start" ? <StartQuiz startQuiz={startQuiz} /> : <EndQuiz />}
-        {result === 'Correct' ?
-            <div className='card--result' style={{color:"green"}}>
-                <FaCheck />
-                <span>{result}</span>
-            </div> : result === 'Incorrect' ?
-            <div className='card--result' style={{color:"red"}}>
-                <FaSkullCrossbones />
-                <span>{result}</span>
-            </div> :
-            <div></div>
-        }   
+        {status === 'Ongoing' ? 
+            <QuestionBlock 
+                questionNumber={questionNumber} 
+                questions={questions} 
+                handleClick={handleClick}/> : 
+         status === "Start" ? 
+            <StartQuiz startQuiz={startQuiz} /> : 
+            <EndQuiz result={result} questions={questions} />}
+            <ResultSpan status={status} result={result} />  
       </section>
     )
 }

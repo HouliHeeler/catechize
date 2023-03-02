@@ -1,6 +1,6 @@
-function EndQuiz() {
+function EndQuiz({ result, questions }) {
   return (
-    <div>EndQuiz</div>
+    <div>You got {result.total} of {questions.length} correct!</div>
   )
 }
 
