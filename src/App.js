@@ -1,24 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
-
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main>
+      <section className="trivia--card">
+        <div className="card--header">Trivia!</div>
+        <section className="card--body">
+          <div className="card--question">What are Dwight's three B's?</div>
+          <div className="card--answers">
+            <ul>
+              <li>Bears</li>
+              <li>Beets</li>
+              <li>Battlestar Galactica</li>
+            </ul>
+          </div>
+        </section>
+      </section>
+    </main>
   );
 }
 
