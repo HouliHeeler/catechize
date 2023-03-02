@@ -51,13 +51,20 @@ html {
   width: 100%;
 }
 
-main {
+.main {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 4rem;
   max-height: 100%;
-  max-width: 100%;
+  max-width: 100vw;
+}
+
+.header {
+  width: 100%;
+  height: 3rem;
+  border-bottom: 1px solid black;
+  margin-bottom: 3rem;
 }
 
 .trivia--card {
@@ -66,8 +73,8 @@ main {
   justify-content: flex-start;
   align-items: center;
   border: 1px solid black;
-  height: 50vh;
-  width: 50vw;
+  height: 70vh;
+  width: 70vw;
 }
 
 .card--header {
@@ -102,22 +109,30 @@ main {
 }
 
 .card--answers > ul > li {
+  background-color: aquamarine;
   margin-bottom: .5rem;
   cursor: pointer;
+  padding: .5rem;
 }
 
+/* Used to randomize the positioning of the correct answer */
 .One {
   order: 1;
 }
-
 .Two {
   order: 3;
 }
-
 .Three {
   order: 5;
 }
-
 .Four {
   order: 7;
+}
+
+.card--result {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin: .5rem;
+  gap: .5rem;
 }
