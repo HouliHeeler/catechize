@@ -1,6 +1,4 @@
-function EndQuiz({ result, questions, resetGame }) {
-
-  
+function EndQuiz({ result, quizType, questions, resetGame }) {
 
   const answers = questions.map((item, index) => {
     return (
@@ -11,9 +9,13 @@ function EndQuiz({ result, questions, resetGame }) {
     )
   })
 
+  const playerOneWins = result.correctArray.filter(el => el === 0 || (el%quizType.contestants === 0)).length
+  const playerTwoWins = result.correctArray.length - playerOneWins
+
+
   return (
     <section className="end--quiz">
-      <div>You got {result.total} of {questions.length} correct!</div>
+      <div>{quizType.contestants > 1 ? `Player One got ${playerOneWins} of ${quizType.numberOfQuestions} correct, while Player Two got ${playerTwoWins} of ${quizType.numberOfQuestions} correct!` : `You got ${playerOneWins} out of ${quizType.numberOfQuestions}`}</div>
       <div className="answer--block">
         <span>The answers are...</span>
         {answers}

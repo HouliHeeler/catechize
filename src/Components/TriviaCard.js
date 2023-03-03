@@ -11,7 +11,6 @@ function TriviaCard() {
     const [result, setResult] = useState({
       questionNumber: 0,
       text: '',
-      total: 0,
       status: 'Start',
       turn: 1,
       correctArray: []
@@ -25,7 +24,7 @@ function TriviaCard() {
     })
 
     async function getQuestions() {
-      await fetch(`https://the-trivia-api.com/api/questions?limit=${quizType.numberOfQuestions}&difficulty=${quizType.difficulty}&categories=${quizType.category}`, {
+      await fetch(`https://the-trivia-api.com/api/questions?limit=${quizType.numberOfQuestions*quizType.contestants}&difficulty=${quizType.difficulty}&categories=${quizType.category}`, {
         headers: {
           'Content-Type': 'application/json'
         },
@@ -61,7 +60,6 @@ function TriviaCard() {
           setResult(prevResult => ({
               ...prevResult,
               text: 'Correct',
-              total: prevResult.total + 1,
               correctArray: [...prevResult.correctArray, result.questionNumber + 1]
           }))
       }
@@ -86,7 +84,6 @@ function TriviaCard() {
         status: "Start",
         questionNumber: 0,
         text: "",
-        total: 0,
         turn: 1,
         correctArray: []
       }))
@@ -94,6 +91,7 @@ function TriviaCard() {
         ...prevState,
         contestants: 1
       }))
+      setQuestions([])
     }
 
     return (
@@ -110,7 +108,8 @@ function TriviaCard() {
               startQuiz={startQuiz}
               setQuizType={setQuizType} /> : 
             <EndQuiz 
-              result={result} 
+              result={result}
+              quizType={quizType} 
               questions={questions} 
               resetGame={resetGame} />}
             <ResultSpan status={result.status} result={result} />  
