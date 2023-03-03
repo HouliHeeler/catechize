@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState } from 'react';
 import StartQuiz from './StartQuiz';
 import EndQuiz from './EndQuiz.js';
 import QuestionBlock from './QuestionBlock';
@@ -19,7 +19,7 @@ function TriviaCard() {
       contestants: 1,
       category: '',
       numberOfQuestions: 10,
-      difficulty: '',
+      difficulty: 'hard',
     })
 
     function handleClick(e) {
@@ -69,7 +69,6 @@ function TriviaCard() {
               ...prevResult,
               status: "Ongoing"
             }))
-      console.log(result)
     }
 
     function resetGame() {

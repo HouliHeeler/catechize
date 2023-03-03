@@ -11,12 +11,19 @@ function StartQuiz({ startQuiz, setQuizType }) {
   }
 
   function handleMulti(e) {
-    let values = []
-    e.map(item => values.push(item.value))
-    setQuizType(prevState => ({
-      ...prevState,
-      [e[0].name]: values.join(",")
-    }))
+    if(e.length === 0) {
+      setQuizType(prevState => ({
+        ...prevState,
+        category: ''
+      }))
+    } else {
+      let values = []
+      e.map(item => values.push(item.value))
+      setQuizType(prevState => ({
+        ...prevState,
+        [e[0].name]: values.join(",")
+      }))
+    }
   }
 
   return (
