@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import StartQuiz from './StartQuiz';
 import EndQuiz from './EndQuiz.js';
 import QuestionBlock from './QuestionBlock';
@@ -13,6 +13,13 @@ function TriviaCard() {
     const [result, setResult] = useState({
         text: "",
         total: 0
+    })
+
+    const [quizType, setQuizType] = useState({
+      contestants: 1,
+      category: '',
+      numberOfQuestions: 10,
+      difficulty: '',
     })
 
     const [status, setStatus] = useState('Start')
@@ -33,12 +40,8 @@ function TriviaCard() {
         }
     }
 
-    function startQuiz() {
-        setStatus("Ongoing")
-    }
-
     async function getQuestions() {
-      await fetch('https://the-trivia-api.com/api/questions?limit=3&categories=science,history', {
+      await fetch(`https://the-trivia-api.com/api/questions?limit=${quizType.numberOfQuestions}&difficulty=${quizType.difficulty}&categories=${quizType.category}`, {
         headers: {
           'Content-Type': 'application/json'
         },
@@ -57,9 +60,17 @@ function TriviaCard() {
       });
     }
 
-    useEffect(() => {
+    function startQuiz() {
       getQuestions()
-    }, [])
+      setStatus("Ongoing")
+    }
+
+    function resetGame() {
+      setStatus("Start")
+      setQuestionNumber(0)
+      setResult({text:"", total: 0})
+      getQuestions()
+    }
 
     return (
       <section className="trivia--card">
@@ -70,8 +81,13 @@ function TriviaCard() {
                 questions={questions} 
                 handleClick={handleClick}/> : 
          status === "Start" ? 
-            <StartQuiz startQuiz={startQuiz} /> : 
-            <EndQuiz result={result} questions={questions} />}
+            <StartQuiz 
+              startQuiz={startQuiz}
+              setQuizType={setQuizType} /> : 
+            <EndQuiz 
+              result={result} 
+              questions={questions} 
+              resetGame={resetGame} />}
             <ResultSpan status={status} result={result} />  
       </section>
     )
