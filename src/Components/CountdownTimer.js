@@ -3,13 +3,13 @@ import React, { useState, useRef, useEffect } from 'react'
   
 function CountdownTimer({ result, handleClick }) {
   
-    // We need ref in this, because we are dealing
-    // with JS setInterval to keep track of it and
-    // stop it when needed
+    //Ref used to access JS setInterval
     const Ref = useRef(null);
   
     // The state for our timer
     const [timer, setTimer] = useState('00:00:00');
+
+    //Uses Display: "None" to hide the timer when not in use
     const [showTimer, setShowTimer] = useState(false)
   
     useEffect(() => {
@@ -28,35 +28,28 @@ function CountdownTimer({ result, handleClick }) {
         };
     }
   
-  
+    //Updates timer on a second by second basis
     const startTimer = (e) => {
-        let { total, seconds } 
-                    = getTimeRemaining(e);
+        let { total, seconds } = getTimeRemaining(e);
         if (total >= 0) {
-  
-            // update the timer
-            // check if less than 10 then we need to 
-            // add '0' at the beginning of the variable
             setTimer(
                 seconds
             )
+        }else if(total === -1000 && result.status === "Start") {
+            clearTimer(getDeadTime())
         }else {
             handleClick()
         }
     }
   
-  
     const clearTimer = (e) => {
-  
-        // If you adjust it you should also need to
-        // adjust the Endtime formula we are about
-        // to code next    
-        setTimer(10);
+        //Set original timer display
+        setTimer(20);
   
         // If you try to remove this line the 
         // updating of timer Variable will be
         // after 1000ms or 1sec
-        if (Ref.current) clearInterval(Ref.current);
+        if(Ref.current) clearInterval(Ref.current);
         const id = setInterval(() => {
             startTimer(e);
         }, 1000)
@@ -66,17 +59,12 @@ function CountdownTimer({ result, handleClick }) {
     const getDeadTime = () => {
         let deadline = new Date();
   
-        // This is where you need to adjust if 
-        // you entend to add more time
-        deadline.setSeconds(deadline.getSeconds() + 10);
+        // This is where you need to adjust the timer starting position
+        deadline.setSeconds(deadline.getSeconds() + 20);
         return deadline;
     }
   
-    // We can use useEffect so that when the component
-    // mount the timer will start as soon as possible
-  
-    // We put empty array to act as componentDid
-    // mount only
+    //Starts the timer anew when the status or question number change
     useEffect(() => {
         clearTimer(getDeadTime());
 
