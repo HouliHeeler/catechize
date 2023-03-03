@@ -3,6 +3,7 @@ import StartQuiz from './StartQuiz';
 import EndQuiz from './EndQuiz.js';
 import QuestionBlock from './QuestionBlock';
 import ResultSpan from './ResultSpan';
+import CountdownTimer from './CountdownTimer';
 
 function TriviaCard() {
 
@@ -50,18 +51,27 @@ function TriviaCard() {
       }else {
         newTurn = 1
       }
-      setResult(prevResult => ({
-        ...prevResult, 
-        text:e.target.id,
-        questionNumber: prevResult.questionNumber + 1,
-        turn: newTurn
-      }))
-      if(e.target.id === 'Correct') {
-          setResult(prevResult => ({
-              ...prevResult,
-              text: 'Correct',
-              correctArray: [...prevResult.correctArray, result.questionNumber + 1]
-          }))
+      if(e === undefined) {
+        setResult(prevResult => ({
+          ...prevResult,
+          text: "Incorrect",
+          questionNumber: prevResult.questionNumber + 1,
+          turn: newTurn
+        }))
+      }else {
+        setResult(prevResult => ({
+          ...prevResult, 
+          text:e.target.id,
+          questionNumber: prevResult.questionNumber + 1,
+          turn: newTurn
+        }))
+        if(e.target.id === 'Correct') {
+            setResult(prevResult => ({
+                ...prevResult,
+                text: 'Correct',
+                correctArray: [...prevResult.correctArray, result.questionNumber + 1]
+            }))
+        }
       }
       if(result.questionNumber === questions.length -1) {
           setResult(prevResult => ({
@@ -97,6 +107,7 @@ function TriviaCard() {
     return (
       <section className="trivia--card">
         <div className="card--header">Trivia!</div>
+          <CountdownTimer result={result} handleClick={handleClick} />
           {(quizType.contestants[0] !== 1 && quizType.contestants !== 1) && <span>Player {result.turn}</span>}
           {result.status === 'Ongoing' ? 
             <QuestionBlock 
