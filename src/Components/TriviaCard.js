@@ -22,27 +22,6 @@ function TriviaCard() {
       difficulty: 'hard',
     })
 
-    function handleClick(e) {
-        setResult(prevResult => ({
-          ...prevResult, 
-          text:e.target.id,
-          questionNumber: prevResult.questionNumber + 1
-        }))
-        if(e.target.id === 'Correct') {
-            setResult(prevResult => ({
-                ...prevResult,
-                text: 'Correct',
-                total: prevResult.total + 1
-            }))
-        }
-        if(result.questionNumber === questions.length -1) {
-            setResult(prevResult => ({
-              ...prevResult,
-              status: "End"
-            }))
-        }
-    }
-
     async function getQuestions() {
       await fetch(`https://the-trivia-api.com/api/questions?limit=${quizType.numberOfQuestions}&difficulty=${quizType.difficulty}&categories=${quizType.category}`, {
         headers: {
@@ -61,6 +40,27 @@ function TriviaCard() {
       .catch(() => {
         console.log("error");
       });
+    }
+
+    function handleClick(e) {
+      setResult(prevResult => ({
+        ...prevResult, 
+        text:e.target.id,
+        questionNumber: prevResult.questionNumber + 1
+      }))
+      if(e.target.id === 'Correct') {
+          setResult(prevResult => ({
+              ...prevResult,
+              text: 'Correct',
+              total: prevResult.total + 1
+          }))
+      }
+      if(result.questionNumber === questions.length -1) {
+          setResult(prevResult => ({
+            ...prevResult,
+            status: "End"
+          }))
+      }
     }
 
     function startQuiz() {
@@ -83,12 +83,13 @@ function TriviaCard() {
     return (
       <section className="trivia--card">
         <div className="card--header">Trivia!</div>
-        {result.status === 'Ongoing' ? 
+          {(quizType.contestants[0] !== 1 && quizType.contestants !== 1) && <span>Player One</span>}
+          {result.status === 'Ongoing' ? 
             <QuestionBlock 
-                questionNumber={result.questionNumber} 
-                questions={questions} 
-                handleClick={handleClick}/> : 
-         result.status === "Start" ? 
+              questionNumber={result.questionNumber} 
+              questions={questions} 
+              handleClick={handleClick}/> : 
+          result.status === "Start" ? 
             <StartQuiz 
               startQuiz={startQuiz}
               setQuizType={setQuizType} /> : 

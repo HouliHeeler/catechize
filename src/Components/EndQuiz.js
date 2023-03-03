@@ -12,7 +12,7 @@ function EndQuiz({ result, questions, resetGame }) {
   return (
     <section className="end--quiz">
       <div>You got {result.total} of {questions.length} correct!</div>
-      <div>
+      <div className="answer--block">
         <span>The answers are...</span>
         {answers}
       </div>

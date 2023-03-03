@@ -8,16 +8,6 @@ export const players = [
       name: "contestants",
       value: 2,
       label: 2
-    }, 
-    {
-      name: "contestants",
-      value: 3,
-      label: 3
-    }, 
-    {
-      name: "contestants",
-      value: 4,
-      label: 4
     }
   ]
 

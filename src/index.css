@@ -140,12 +140,24 @@ html {
 .end--quiz {
   display: flex;
   flex-direction: column;
+  max-height: 75%;
   gap: 1rem;
   margin: 1rem 0;
+  padding: 1rem;
+}
+
+.answer--block {
+  display: flex;
+  flex-direction: column;
+  max-height: 85%;
+  overflow-y: scroll;
+  border: 1px solid black;
+  padding: .5rem;
 }
 
 .end--answers {
   display: flex;
   flex-direction: column;
   margin: 1rem .5rem;
+  gap: .75rem;
 }
