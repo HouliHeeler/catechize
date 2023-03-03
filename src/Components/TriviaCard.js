@@ -8,11 +8,11 @@ function TriviaCard() {
 
     const [questions, setQuestions] = useState([])
 
-    const [questionNumber, setQuestionNumber] = useState(0)
-
     const [result, setResult] = useState({
-        text: "",
-        total: 0
+      questionNumber: 0,
+      text: '',
+      total: 0,
+      status: 'Start',
     })
 
     const [quizType, setQuizType] = useState({
@@ -22,21 +22,24 @@ function TriviaCard() {
       difficulty: '',
     })
 
-    const [status, setStatus] = useState('Start')
-
     function handleClick(e) {
-        setResult({...result, text:e.target.id})
+        setResult(prevResult => ({
+          ...prevResult, 
+          text:e.target.id,
+          questionNumber: prevResult.questionNumber + 1
+        }))
         if(e.target.id === 'Correct') {
             setResult(prevResult => ({
+                ...prevResult,
                 text: 'Correct',
                 total: prevResult.total + 1
             }))
         }
-        setQuestionNumber(prevNumber => prevNumber+1)
-        if(questionNumber !== questions.length - 1) {
-            setStatus("Ongoing")
-        }else {
-            setStatus("End")
+        if(result.questionNumber === questions.length -1) {
+            setResult(prevResult => ({
+              ...prevResult,
+              status: "End"
+            }))
         }
     }
 
@@ -62,25 +65,31 @@ function TriviaCard() {
 
     function startQuiz() {
       getQuestions()
-      setStatus("Ongoing")
+      setResult(prevResult => ({
+              ...prevResult,
+              status: "Ongoing"
+            }))
+      console.log(result)
     }
 
     function resetGame() {
-      setStatus("Start")
-      setQuestionNumber(0)
-      setResult({text:"", total: 0})
-      getQuestions()
+      setResult(({
+        status: "Start",
+        questionNumber: 0,
+        text: "",
+        total: 0,
+      }))
     }
 
     return (
       <section className="trivia--card">
         <div className="card--header">Trivia!</div>
-        {status === 'Ongoing' ? 
+        {result.status === 'Ongoing' ? 
             <QuestionBlock 
-                questionNumber={questionNumber} 
+                questionNumber={result.questionNumber} 
                 questions={questions} 
                 handleClick={handleClick}/> : 
-         status === "Start" ? 
+         result.status === "Start" ? 
             <StartQuiz 
               startQuiz={startQuiz}
               setQuizType={setQuizType} /> : 
@@ -88,7 +97,7 @@ function TriviaCard() {
               result={result} 
               questions={questions} 
               resetGame={resetGame} />}
-            <ResultSpan status={status} result={result} />  
+            <ResultSpan status={result.status} result={result} />  
       </section>
     )
 }
