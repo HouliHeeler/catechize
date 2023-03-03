@@ -27,11 +27,26 @@ function StartQuiz({ startQuiz, setQuizType }) {
   }
 
   return (
-    <section>
-      <Select onChange={handleChange} options={players}/>
-      <Select onChange={handleChange} options={number} />
-      <Select onChange={handleMulti} options={categories} multi='true'/>
-      <Select onChange={handleChange} options={difficulty} />
+    <section className="start--quiz">
+      <div className="start--options">
+        <Select 
+          onChange={handleChange} 
+          options={players} 
+          placeholder="Number of Players" />
+        <Select 
+          onChange={handleChange} 
+          options={number} 
+          placeholder="Number of Questions" />
+        <Select 
+          onChange={handleMulti} 
+          options={categories} 
+          multi='true'
+          placeholder="Categories" />
+        <Select 
+          onChange={handleChange} 
+          options={difficulty} 
+          placeholder="Difficulty" />
+      </div>
       <button onClick={startQuiz} >StartQuiz</button>
     </section>
   )

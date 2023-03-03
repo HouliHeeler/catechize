@@ -1,10 +1,12 @@
 function EndQuiz({ result, questions, resetGame }) {
 
+  
+
   const answers = questions.map((item, index) => {
     return (
       <div key={index} className="end--answers">
         <span>{item.question}</span>
-        <span>{item.correctAnswer}</span>
+        <span className={result.correctArray.includes(index + 1) ? "correct--answer" : "incorrect--answer"}>{item.correctAnswer}</span>
       </div>
     )
   })

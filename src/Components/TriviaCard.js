@@ -13,6 +13,8 @@ function TriviaCard() {
       text: '',
       total: 0,
       status: 'Start',
+      turn: 1,
+      correctArray: []
     })
 
     const [quizType, setQuizType] = useState({
@@ -43,16 +45,24 @@ function TriviaCard() {
     }
 
     function handleClick(e) {
+      let newTurn
+      if(result.turn === 1) {
+        newTurn = 2
+      }else {
+        newTurn = 1
+      }
       setResult(prevResult => ({
         ...prevResult, 
         text:e.target.id,
-        questionNumber: prevResult.questionNumber + 1
+        questionNumber: prevResult.questionNumber + 1,
+        turn: newTurn
       }))
       if(e.target.id === 'Correct') {
           setResult(prevResult => ({
               ...prevResult,
               text: 'Correct',
-              total: prevResult.total + 1
+              total: prevResult.total + 1,
+              correctArray: [...prevResult.correctArray, result.questionNumber + 1]
           }))
       }
       if(result.questionNumber === questions.length -1) {
@@ -77,13 +87,19 @@ function TriviaCard() {
         questionNumber: 0,
         text: "",
         total: 0,
+        turn: 1,
+        correctArray: []
+      }))
+      setQuizType(prevState => ({
+        ...prevState,
+        contestants: 1
       }))
     }
 
     return (
       <section className="trivia--card">
         <div className="card--header">Trivia!</div>
-          {(quizType.contestants[0] !== 1 && quizType.contestants !== 1) && <span>Player One</span>}
+          {(quizType.contestants[0] !== 1 && quizType.contestants !== 1) && <span>Player {result.turn}</span>}
           {result.status === 'Ongoing' ? 
             <QuestionBlock 
               questionNumber={result.questionNumber} 
