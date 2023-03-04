@@ -10,6 +10,29 @@ export const players = [
       label: 2
     }
   ]
+  
+export const timer = [
+    {
+      name: "timer",
+      value: 10,
+      label: "10 Seconds"
+    }, 
+    {
+      name: "timer",
+      value: 20,
+      label: "20 Seconds"
+    },
+    {
+      name: "timer",
+      value: 30,
+      label: "30 Seconds"
+    },
+    {
+      name: "timer",
+      value: 'none',
+      label: "None"
+    }
+  ]
 
 export const difficulty = [
     {

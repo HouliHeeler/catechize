@@ -1,5 +1,5 @@
 import Select from "react-dropdown-select";
-import { players, number, categories, difficulty } from '../constants'
+import { players, number, categories, difficulty, timer } from '../constants'
 
 function StartQuiz({ startQuiz, setQuizType }) {
 
@@ -46,6 +46,10 @@ function StartQuiz({ startQuiz, setQuizType }) {
           onChange={handleChange} 
           options={difficulty} 
           placeholder="Difficulty" />
+        <Select
+          onChange={handleChange}
+          options={timer}
+          placeholder="Timer" />
       </div>
       <button onClick={startQuiz} >StartQuiz</button>
     </section>

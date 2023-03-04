@@ -1,24 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react'
   
   
-function CountdownTimer({ result, handleClick }) {
+function CountdownTimer({ result, handleClick, quizType }) {
   
     //Ref used to access JS setInterval
     const Ref = useRef(null);
   
     // The state for our timer
     const [timer, setTimer] = useState('00:00:00');
-
-    //Uses Display: "None" to hide the timer when not in use
-    const [showTimer, setShowTimer] = useState(false)
-  
-    useEffect(() => {
-        if(result.status === 'Ongoing') {
-            setShowTimer(true)
-        }else {
-            setShowTimer(false)
-        }
-    }, [result.status])
   
     const getTimeRemaining = (e) => {
         const total = Date.parse(e) - Date.parse(new Date());
@@ -44,7 +33,7 @@ function CountdownTimer({ result, handleClick }) {
   
     const clearTimer = (e) => {
         //Set original timer display
-        setTimer(20);
+        setTimer(quizType.timer);
   
         // If you try to remove this line the 
         // updating of timer Variable will be
@@ -60,7 +49,7 @@ function CountdownTimer({ result, handleClick }) {
         let deadline = new Date();
   
         // This is where you need to adjust the timer starting position
-        deadline.setSeconds(deadline.getSeconds() + 20);
+        deadline.setSeconds(deadline.getSeconds() + quizType.timer[0]);
         return deadline;
     }
   
@@ -73,7 +62,7 @@ function CountdownTimer({ result, handleClick }) {
   
     return (
         <div>
-            {showTimer && <h2>{timer}</h2>}
+            <h2>{timer}</h2>
         </div>
     )
 }
