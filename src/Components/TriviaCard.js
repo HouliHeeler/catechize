@@ -103,15 +103,18 @@ function TriviaCard() {
 
     function resetGame() {
       setResult(({
-        status: "Start",
         questionNumber: 0,
-        text: "",
+        text: '',
+        status: 'Start',
         turn: 1,
         correctArray: []
       }))
-      setQuizType(prevState => ({
-        ...prevState,
-        contestants: 1
+      setQuizType(({
+        contestants: 1,
+        category: '',
+        numberOfQuestions: 10,
+        difficulty: 'hard',
+        timer: 20
       }))
       setQuestions([])
     }
