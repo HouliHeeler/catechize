@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
   
   
-function CountdownTimer({ result, handleClick, quizType }) {
+function CountdownTimer({ result, handleClick, quizType, setResult }) {
   
     //Ref used to access JS setInterval
     const Ref = useRef(null);
@@ -23,6 +23,8 @@ function CountdownTimer({ result, handleClick, quizType }) {
         if(Ref.current) clearInterval(Ref.current)
     }
 
+    console.log(result.interlude)
+
     //Updates timer on a second by second basis
     const startTimer = (e) => {
         let { total, seconds } = getTimeRemaining(e);
@@ -34,6 +36,12 @@ function CountdownTimer({ result, handleClick, quizType }) {
             clearTimer(getDeadTime())
         }else if(result.status === "End") {
             stopTimer()
+        }else if(total === -1000 && result.interlude) {
+            clearTimer(getDeadTime())
+            setResult(prevResult => ({
+                ...prevResult,
+                interlude: false
+            }))
         }else {
             handleClick()
         }
@@ -41,7 +49,12 @@ function CountdownTimer({ result, handleClick, quizType }) {
   
     const clearTimer = (e) => {
         //Set original timer display
-        setTimer(quizType.timer);
+        if(!result.interlude) {
+            setTimer(quizType.timer);
+        } else {
+            setTimer(5)
+        }
+        
   
         // If you try to remove this line the 
         // updating of timer Variable will be
@@ -57,7 +70,11 @@ function CountdownTimer({ result, handleClick, quizType }) {
         let deadline = new Date();
   
         // This is where you need to adjust the timer starting position
-        deadline.setSeconds(deadline.getSeconds() + quizType.timer[0]);
+        if(!result.interlude) {
+            deadline.setSeconds(deadline.getSeconds() + quizType.timer[0]);
+        }else {
+            deadline.setSeconds(deadline.getSeconds() + 5);
+        }
         return deadline;
     }
   
@@ -66,7 +83,7 @@ function CountdownTimer({ result, handleClick, quizType }) {
         clearTimer(getDeadTime());
 
         // eslint-disable-next-line
-    }, [result.questionNumber, result.status]); 
+    }, [result.questionNumber, result.status, result.interlude]); 
   
     return (
         <div>

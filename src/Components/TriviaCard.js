@@ -14,6 +14,7 @@ function TriviaCard() {
       text: '',
       status: 'Start',
       turn: 1,
+      interlude: false,
       correctArray: []
     })
 
@@ -68,22 +69,24 @@ function TriviaCard() {
           ...prevResult,
           text: "Incorrect",
           questionNumber: prevResult.questionNumber + 1,
-          turn: newTurn
+          turn: newTurn,
+          interlude: true
         }))
       }else {
         setResult(prevResult => ({
           ...prevResult, 
           text:e.target.id,
           questionNumber: prevResult.questionNumber + 1,
-          turn: newTurn
-        }))
-        if(e.target.id === 'Correct') {
-            setResult(prevResult => ({
-                ...prevResult,
-                text: 'Correct',
-                correctArray: [...prevResult.correctArray, result.questionNumber + 1]
-            }))
-        }
+          turn: newTurn,
+          interlude: true
+      }))
+      if(e.target.id === 'Correct') {
+          setResult(prevResult => ({
+              ...prevResult,
+              text: 'Correct',
+              correctArray: [...prevResult.correctArray, result.questionNumber + 1]
+          }))
+      }
       }
       if(result.questionNumber === questions.length -1) {
           setResult(prevResult => ({
@@ -107,6 +110,7 @@ function TriviaCard() {
         text: '',
         status: 'Start',
         turn: 1,
+        interlude: false,
         correctArray: []
       }))
       setQuizType(({
@@ -122,12 +126,18 @@ function TriviaCard() {
     return (
       <section className="trivia--card">
         <div className="card--header">Trivia!</div>
-          {(quizType.timer > 0 && showTimer) && <CountdownTimer result={result} quizType={quizType} handleClick={handleClick} />}
+          {((quizType.timer > 0 && showTimer) || result.interlude) && 
+            <CountdownTimer 
+              result={result} 
+              quizType={quizType} 
+              handleClick={handleClick} 
+              setResult={setResult} />}
           {(quizType.contestants[0] !== 1 && quizType.contestants !== 1) && <span>Player {result.turn}</span>}
           {result.status === 'Ongoing' ? 
             <QuestionBlock 
               questionNumber={result.questionNumber} 
-              questions={questions} 
+              questions={questions}
+              result={result} 
               handleClick={handleClick}/> : 
           result.status === "Start" ? 
             <StartQuiz 
