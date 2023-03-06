@@ -22,7 +22,7 @@ function TriviaCard() {
       category: '',
       numberOfQuestions: 10,
       difficulty: 'hard',
-      timer: 20
+      timer: [20]
     })
 
     //Uses Display: "None" to hide the timer when not in use
