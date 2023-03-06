@@ -110,24 +110,17 @@ html {
 }
 
 .card--answers > ul > li {
-  background-color: aquamarine;
   margin-bottom: .5rem;
   cursor: pointer;
   padding: .5rem;
 }
 
-/* Used to randomize the positioning of the correct answer */
-.One {
-  order: 1;
-}
-.Two {
-  order: 3;
-}
-.Three {
-  order: 5;
-}
-.Four {
-  order: 7;
+.redacted {
+  background-color: black;
+  font-size: 1.2rem;
+  color: white;
+  transform: rotate(-2deg);
+  text-align: center;
 }
 
 .card--result {
