@@ -17,6 +17,12 @@ function CountdownTimer({ result, handleClick, quizType }) {
         };
     }
   
+    //Stops timer once game has ended
+    function stopTimer() {
+        setTimer(0);
+        if(Ref.current) clearInterval(Ref.current)
+    }
+
     //Updates timer on a second by second basis
     const startTimer = (e) => {
         let { total, seconds } = getTimeRemaining(e);
@@ -26,6 +32,8 @@ function CountdownTimer({ result, handleClick, quizType }) {
             )
         }else if(total === -1000 && result.status === "Start") {
             clearTimer(getDeadTime())
+        }else if(result.status === "End") {
+            stopTimer()
         }else {
             handleClick()
         }
