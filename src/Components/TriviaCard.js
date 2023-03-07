@@ -2,7 +2,6 @@ import { useState } from 'react';
 import StartQuiz from './StartQuiz';
 import EndQuiz from './EndQuiz.js';
 import QuestionBlock from './QuestionBlock';
-import ResultSpan from './ResultSpan';
 
 function TriviaCard() {
 
@@ -13,7 +12,7 @@ function TriviaCard() {
       text: '',
       status: 'Start',
       turn: 1,
-      interlude: false,
+      interlude: true,
       correctArray: []
     })
 
@@ -113,25 +112,23 @@ function TriviaCard() {
 
     return (
       <section className="trivia--card">
-        <div className="card--header">Trivia!</div>
-          {(quizType.contestants[0] !== 1 && quizType.contestants !== 1) && <span>Player {result.turn}</span>}
-          {result.status === 'Ongoing' ? 
-            <QuestionBlock 
-              questions={questions}
-              quizType={quizType}
-              result={result}
-              setResult={setResult} 
-              handleClick={handleClick}/> : 
-          result.status === "Start" ? 
-            <StartQuiz 
-              startQuiz={startQuiz}
-              setQuizType={setQuizType} /> : 
-            <EndQuiz 
-              result={result}
-              quizType={quizType} 
-              questions={questions} 
-              resetGame={resetGame} />}
-            <ResultSpan status={result.status} result={result} />  
+        {(quizType.contestants[0] !== 1 && quizType.contestants !== 1) && <span>Player {result.turn}</span>}
+        {result.status === 'Ongoing' ? 
+          <QuestionBlock 
+            questions={questions}
+            quizType={quizType}
+            result={result}
+            setResult={setResult} 
+            handleClick={handleClick}/> : 
+            result.status === "Start" ? 
+          <StartQuiz 
+            startQuiz={startQuiz}
+            setQuizType={setQuizType} /> : 
+          <EndQuiz 
+            result={result}
+            quizType={quizType} 
+            questions={questions} 
+            resetGame={resetGame} />}
       </section>
     )
 }

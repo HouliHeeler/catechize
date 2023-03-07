@@ -1,14 +1,22 @@
 import Timer from './Timer'
+import ResultSpan from './ResultSpan';
+import Classified from '../app/classified.png'
+import AlarmClock from '../app/alarmclock.png'
 
 function Interlude({ item, index, redacted, setRedacted, thinkFast, setThinkFast, setResult, result }) {
   return (
-    <div>
+    <div className="interlude--body">
         <section className="card--body" key={index}>
             <div className="card--question">{item.question}</div>
-            <button onClick={() => setRedacted(true)} className={redacted ? 'redacted--button' : 'btn--blk'} >Redact</button>
-            <button onClick={() => setThinkFast(true)} className={thinkFast ? 'redacted--button' : 'btn--blk'}>Think Fast</button>
+            <div className='challenge--buttons'>
+              <button onClick={() => setRedacted(prevState => !prevState)} className={redacted ? 'challenge--button--clicked' : 'challenge--button'} ><img src={Classified} alt="Classified" /></button>
+              <button onClick={() => setThinkFast(prevState => !prevState)} className={thinkFast ? 'challenge--button--clicked' : 'challenge--button'}><img src={AlarmClock} alt="Alarm Clock" /></button>
+            </div>
+            <ResultSpan status={result.status} result={result} />
         </section>
-        <Timer setResult={setResult} result={result} />
+        <div className='interlude--timer'>
+          <Timer setResult={setResult} result={result} />
+        </div>
     </div>
   )
 }

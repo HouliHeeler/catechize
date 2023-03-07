@@ -29,29 +29,34 @@ function StartQuiz({ startQuiz, setQuizType }) {
   return (
     <section className="start--quiz">
       <div className="start--options">
-        <Select 
+        <Select
+          className="individual--option" 
           onChange={handleChange} 
           options={players} 
           placeholder="Number of Players" />
         <Select 
+          className="individual--option" 
           onChange={handleChange} 
           options={number} 
           placeholder="Number of Questions" />
         <Select 
+          className="individual--option" 
           onChange={handleMulti} 
           options={categories} 
           multi='true'
           placeholder="Categories" />
-        <Select 
+        <Select
+          className="individual--option" 
           onChange={handleChange} 
           options={difficulty} 
           placeholder="Difficulty" />
         <Select
+          className="individual--option" 
           onChange={handleChange}
           options={timer}
           placeholder="Timer" />
       </div>
-      <button onClick={startQuiz} >StartQuiz</button>
+      <button className="start--button" onClick={startQuiz} >Start Quiz</button>
     </section>
   )
 }

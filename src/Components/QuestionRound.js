@@ -47,7 +47,9 @@ function QuestionRound({ thinkFast, redacted, redactedNumber, handleClick, item,
                 </li>
             </ul>
         </div>
+        <div className='question--timer'>
         {quizType.timer[0] !== 'none' ? <Timer thinkFast={thinkFast} quizType={quizType} result={result} handleClick={handleClick} /> : undefined}
+        </div>
       </section>
     )
 }

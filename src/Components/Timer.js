@@ -14,8 +14,7 @@ function Timer({ thinkFast, setResult, quizType, result, handleClick }) {
     return (
         <div className='timer'>
             <CountdownCircleTimer
-                colors={['#00FF00', '#880808']}
-                colorsTime={[maxTime, 0]}
+                colors={'#ff48c4'}
                 size={40}
                 strokeWidth={5}
                 trailStrokeWidth={4}
