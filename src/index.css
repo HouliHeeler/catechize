@@ -170,15 +170,6 @@ button {
   right: 2rem;
 }
 
-.redacted {
-  background-color: black !important;
-  font-size: 1.2rem;
-  color: white !important;
-  border: none;
-  transform: rotate(-1deg);
-  text-align: center;
-}
-
 .timer {
   width: 10px;
   height: 10px;
@@ -282,6 +273,19 @@ button {
 .challenge--button--clicked {
   outline: 1px solid black;
   box-shadow: 5px 5px #ff48c4;
+}
+
+.redacted {
+  background-color: black !important;
+  font-size: 1.2rem;
+  color: white !important;
+  border: none;
+  transform: rotate(-1deg);
+  text-align: center;
+}
+
+.need--glasses {
+  font-size: .35rem;
 }
 
 .card--result {

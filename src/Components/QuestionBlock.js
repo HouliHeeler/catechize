@@ -11,12 +11,15 @@ function QuestionBlock({ questions, handleClick, result, setResult, quizType }) 
 
     //Halves time for next question
     const [thinkFast, setThinkFast] = useState(false)
-    console.log(thinkFast)
+
+    //Shrinks font-size for answers
+    const [needGlasses, setNeedGlasses] = useState(false)
 
     //Resets Redacted and ThinkFast values to false
     useEffect(() => {
       setRedacted(false)
       setThinkFast(false)
+      setNeedGlasses(false)
     }, [result.questionNumber])
 
     const questionBlock = questions.map((item, index) => {
@@ -27,6 +30,7 @@ function QuestionBlock({ questions, handleClick, result, setResult, quizType }) 
                 result={result}
                 quizType={quizType} 
                 handleClick={handleClick}
+                needGlasses={needGlasses}
                 thinkFast={thinkFast} 
                 redacted={redacted}
                 redactedNumber={redactedNumber} 
@@ -35,6 +39,8 @@ function QuestionBlock({ questions, handleClick, result, setResult, quizType }) 
               <Interlude
                 result={result}
                 setResult={setResult}
+                needGlasses={needGlasses}
+                setNeedGlasses={setNeedGlasses}
                 setRedacted={setRedacted}
                 redacted={redacted} 
                 setThinkFast={setThinkFast}
