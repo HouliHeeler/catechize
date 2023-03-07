@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import QuestionRound from './QuestionRound';
 import Interlude from './Interlude';
 
-function QuestionBlock({ questions, handleClick, result, setResult, quizType }) {
+function QuestionBlock({ questions, handleClick, result, setResult, challenges, setChallenges, quizType }) {
 
     //Randomizes placement of Redacted answer
     const [redacted, setRedacted] = useState(false)
@@ -37,6 +37,9 @@ function QuestionBlock({ questions, handleClick, result, setResult, quizType }) 
                 item={item}
                 index={index} /> :
               <Interlude
+                quizType={quizType}
+                challenges={challenges}
+                setChallenges={setChallenges}
                 result={result}
                 setResult={setResult}
                 needGlasses={needGlasses}

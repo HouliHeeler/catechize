@@ -31,27 +31,32 @@ function StartQuiz({ startQuiz, setQuizType }) {
       <div className="start--options">
         <Select
           className="individual--option" 
+          separator="true"
           onChange={handleChange} 
           options={players} 
           placeholder="Number of Players" />
         <Select 
           className="individual--option" 
+          separator="true"
           onChange={handleChange} 
           options={number} 
           placeholder="Number of Questions" />
         <Select 
-          className="individual--option" 
+          className="individual--option"
+          separator="true"
           onChange={handleMulti} 
           options={categories} 
           multi='true'
           placeholder="Categories" />
         <Select
           className="individual--option" 
+          separator="true"
           onChange={handleChange} 
           options={difficulty} 
           placeholder="Difficulty" />
         <Select
           className="individual--option" 
+          separator="true"
           onChange={handleChange}
           options={timer}
           placeholder="Timer" />

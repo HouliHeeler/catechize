@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import StartQuiz from './StartQuiz';
 import EndQuiz from './EndQuiz.js';
 import QuestionBlock from './QuestionBlock';
@@ -23,6 +23,22 @@ function TriviaCard() {
       difficulty: 'hard',
       timer: [20]
     })
+
+    const [challenges, setChallenges] = useState(() => {
+      const saved = sessionStorage.getItem('challenges')
+      const initialValue = JSON.parse(saved)
+      return initialValue || 0
+    })
+  
+    useEffect(() => {
+      if(result.status === 'Start') {
+        setChallenges(0)
+      }
+    }, [result.status])
+  
+    useEffect(() => {
+      sessionStorage.setItem("challenges", challenges)
+    }, [challenges])
 
     async function getQuestions() {
       await fetch(`https://the-trivia-api.com/api/questions?limit=${quizType.numberOfQuestions*quizType.contestants}&difficulty=${quizType.difficulty}&categories=${quizType.category}`, {
@@ -117,6 +133,8 @@ function TriviaCard() {
           <QuestionBlock 
             questions={questions}
             quizType={quizType}
+            challenges={challenges}
+            setChallenges={setChallenges}
             result={result}
             setResult={setResult} 
             handleClick={handleClick}/> : 

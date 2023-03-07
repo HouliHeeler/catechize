@@ -13,7 +13,6 @@ function QuestionRound({ needGlasses, thinkFast, redacted, redactedNumber, handl
     }
 
     const answerMinimized = needGlasses ? 'need--glasses' : undefined
-    console.log(needGlasses)
 
     return (
       <section className="card--body" key={index}>

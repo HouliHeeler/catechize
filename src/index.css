@@ -118,7 +118,7 @@ button {
   border-radius: 1% 1% 2% 4% / 2% 6% 5% 4%;
 }
 
-.trivia--card > span {
+.trivia--card > span, .card--body > span {
   font-size: 1.3rem;
   font-family: pixel;
 }
