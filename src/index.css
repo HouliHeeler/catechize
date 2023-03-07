@@ -123,6 +123,24 @@ html {
   text-align: center;
 }
 
+.redacted--button {
+  background-color: black;
+  color: white;
+}
+
+.timer-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.time-wrapper {
+  position: relative;
+  width: 80px;
+  height: 60px;
+  font-size: 48px;
+  font-family: "Montserrat";
+}
+
 .card--result {
   display: flex;
   justify-content: center;

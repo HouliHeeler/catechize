@@ -1,8 +1,11 @@
-function QuestionRound({ redactedNumber, handleClick, item }) {
+import Timer from './Timer'
+
+function QuestionRound({ redacted, redactedNumber, handleClick, item, index, quizType, result }) {
 
     //Randomizes placement of correct answer
-    const randomNumber = Math.ceil(Math.random() * 4)
 
+    const randomNumber = Math.ceil(Math.random() * 4)
+    
     const orderStyle={
       order: randomNumber === 1 ? 1 :
              randomNumber === 2 ? 3 :
@@ -10,38 +13,42 @@ function QuestionRound({ redactedNumber, handleClick, item }) {
     }
 
     return (
+      <section className="card--body" key={index}>
+        {quizType.timer[0] !== 'none' ? <Timer quizType={quizType} result={result} handleClick={handleClick} /> : undefined}
+        <div className="card--question">{item.question}</div>
         <div className="card--answers">
             <ul>
                 <li 
                   id='Incorrect' 
                   style={{order: 2}}
-                  className={redactedNumber === 1 ? 'redacted' : undefined} 
+                  className={(redacted && redactedNumber) === 1 ? 'redacted' : undefined} 
                   onClick={handleClick}>
-                    {redactedNumber === 1 ? "[Redacted]" : item.incorrectAnswers[0]}
+                    {(redacted && redactedNumber) === 1 ? "[Redacted]" : item.incorrectAnswers[0]}
                 </li>
                 <li 
                   id='Incorrect' 
                   style={{order: 4}}
-                  className={redactedNumber === 2 ? 'redacted' : undefined} 
+                  className={(redacted && redactedNumber) === 2 ? 'redacted' : undefined} 
                   onClick={handleClick}>
-                    {redactedNumber === 2 ? "[Redacted]" : item.incorrectAnswers[1]}
+                    {(redacted && redactedNumber) === 2 ? "[Redacted]" : item.incorrectAnswers[1]}
                 </li>
                 <li 
                   id='Incorrect' 
                   style={{order: 6}}
-                  className={redactedNumber === 3 ? 'redacted' : undefined} 
+                  className={(redacted && redactedNumber) === 3 ? 'redacted' : undefined} 
                   onClick={handleClick}>
-                    {redactedNumber === 3 ? "[Redacted]" : item.incorrectAnswers[2]}
+                    {(redacted && redactedNumber) === 3 ? "[Redacted]" : item.incorrectAnswers[2]}
                 </li>
                 <li 
                   id='Correct'
                   style={orderStyle}
-                  className={redactedNumber === 4 ? 'redacted' : undefined}
+                  className={(redacted && redactedNumber) === 4 ? 'redacted' : undefined}
                   onClick={handleClick}>
-                    {redactedNumber === 4 ? "[Redacted]" : item.correctAnswer}
+                    {(redacted && redactedNumber) === 4 ? "[Redacted]" : item.correctAnswer}
                 </li>
             </ul>
         </div>
+      </section>
     )
 }
 

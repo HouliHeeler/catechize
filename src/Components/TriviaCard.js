@@ -1,9 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import StartQuiz from './StartQuiz';
 import EndQuiz from './EndQuiz.js';
 import QuestionBlock from './QuestionBlock';
 import ResultSpan from './ResultSpan';
-import CountdownTimer from './CountdownTimer';
 
 function TriviaCard() {
 
@@ -25,17 +24,6 @@ function TriviaCard() {
       difficulty: 'hard',
       timer: [20]
     })
-
-    //Uses Display: "None" to hide the timer when not in use
-    const [showTimer, setShowTimer] = useState(false)
-  
-    useEffect(() => {
-        if(result.status === 'Ongoing') {
-            setShowTimer(true)
-        }else {
-            setShowTimer(false)
-        }
-    }, [result.status])
 
     async function getQuestions() {
       await fetch(`https://the-trivia-api.com/api/questions?limit=${quizType.numberOfQuestions*quizType.contestants}&difficulty=${quizType.difficulty}&categories=${quizType.category}`, {
@@ -126,18 +114,13 @@ function TriviaCard() {
     return (
       <section className="trivia--card">
         <div className="card--header">Trivia!</div>
-          {((quizType.timer > 0 && showTimer) || result.interlude) && 
-            <CountdownTimer 
-              result={result} 
-              quizType={quizType} 
-              handleClick={handleClick} 
-              setResult={setResult} />}
           {(quizType.contestants[0] !== 1 && quizType.contestants !== 1) && <span>Player {result.turn}</span>}
           {result.status === 'Ongoing' ? 
             <QuestionBlock 
-              questionNumber={result.questionNumber} 
               questions={questions}
-              result={result} 
+              quizType={quizType}
+              result={result}
+              setResult={setResult} 
               handleClick={handleClick}/> : 
           result.status === "Start" ? 
             <StartQuiz 
