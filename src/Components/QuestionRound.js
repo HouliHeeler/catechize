@@ -1,6 +1,6 @@
 import Timer from './Timer'
 
-function QuestionRound({ redacted, redactedNumber, handleClick, item, index, quizType, result }) {
+function QuestionRound({ thinkFast, redacted, redactedNumber, handleClick, item, index, quizType, result }) {
 
     //Randomizes placement of correct answer
 
@@ -14,7 +14,6 @@ function QuestionRound({ redacted, redactedNumber, handleClick, item, index, qui
 
     return (
       <section className="card--body" key={index}>
-        {quizType.timer[0] !== 'none' ? <Timer quizType={quizType} result={result} handleClick={handleClick} /> : undefined}
         <div className="card--question">{item.question}</div>
         <div className="card--answers">
             <ul>
@@ -48,6 +47,7 @@ function QuestionRound({ redacted, redactedNumber, handleClick, item, index, qui
                 </li>
             </ul>
         </div>
+        {quizType.timer[0] !== 'none' ? <Timer thinkFast={thinkFast} quizType={quizType} result={result} handleClick={handleClick} /> : undefined}
       </section>
     )
 }
