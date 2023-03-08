@@ -50,9 +50,22 @@ table {
   font-family: 'Pixel';
   src: local('Pixel'), url(./app/pixel.ttf) format('woff');
 }
+@font-face {
+  font-family: 'Conserta';
+  src: local('Conserta'), url(./app/conserta.ttf) format('woff');
+}
+@font-face {
+  font-family: 'Eleonora';
+  src: local('Eleonora'), url(./app/eleonora.ttf) format('woff');
+}
+@font-face {
+  font-family: 'Tiffany';
+  src: local('Tiffany'), url(./app/tiffany.ttf) format('woff');
+}
 
 * {
   box-sizing: border-box;
+  font-family: eleonora;
 }
 
 html, body, main {
@@ -130,9 +143,8 @@ button {
   border-radius: 1% 1% 2% 4% / 2% 6% 5% 4%;
 }
 
-.trivia--card > span, .card--body > span {
+.trivia--card > span {
   font-size: 1.3rem;
-  font-family: pixel;
 }
 
 .instructions {
@@ -152,9 +164,8 @@ button {
 
 .instructions--challenge {
   display: flex;
-  width: 100%;
   align-items: center;
-  padding: 1rem;
+  width: 100%;
 }
 
 .instructions--challenge > img {
@@ -164,6 +175,12 @@ button {
   border-radius: 50%;
   outline: 1px solid black;
   margin-right: 1rem;
+}
+
+.instructions--challenge > p {
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
 
 .instructions > button {
@@ -181,9 +198,8 @@ button {
 }
 
 .card--question {
-  font-family: pixel;
   margin: 2rem;
-  font-size: 1rem;
+  font-size: 1.5rem;
   max-height: 16rem;
   overflow-x: scroll;
   background-color: #ff48c4;
@@ -231,7 +247,6 @@ button {
   width: 100%;
   gap: 1rem;
   margin: 1rem 0;
-  font-family: pixel;
 }
 
 .individual--option {
@@ -241,9 +256,9 @@ button {
 }
 
 .start--button {
-  font-family: pixel;
-  width: 6rem;
+  width: 4rem;
   height: 3rem;
+  font-size: 1rem;
   outline: 1px solid black;
   background-color: white;
   box-shadow: .25rem .25rem #ff48c4;
@@ -261,6 +276,7 @@ button {
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+  height: 100%;
   max-height: 100%;
   gap: 1rem;
   margin: 1rem 0;
@@ -268,7 +284,6 @@ button {
 }
 
 .answer--score {
-  font-family: pixel;
   font-size: 1.5rem;
   margin-bottom: 1rem;
 }
@@ -322,8 +337,7 @@ button {
 }
 
 .challenge--counter {
-  font-size: 1rem;
-  font-family: pixel;
+  font-size: 1.5rem;
 }
 
 .redacted {
@@ -348,7 +362,6 @@ button {
 
 .card--result {
   font-size: 1.3rem;
-  font-family: pixel;
   display: flex;
   justify-content: center;
   align-items: flex-end;
@@ -361,18 +374,6 @@ button {
   height: 1rem;
 }
 
-.question--timer {
-  position: absolute;
-  bottom: 9%;
-  right: 3%;
-}
-
-.interlude--timer {
-  position: absolute;
-  bottom: 3rem;
-  right: 3rem;
-}
-
 .correct--answer {
   color: green;
 }
@@ -383,35 +384,23 @@ button {
 
 @media (max-width: 810px) {
   * {
-    font-size: 14px;
-  }
-  .question--timer {
-    bottom: 5%;
-    right: 5%;
+    font-size: 16px;
   }
 }
 
 @media (max-width: 600px) {
   * {
-    font-size: 12px;
-  }
-  .question--timer {
-    bottom: 2.5rem;
-    right: 1.5rem;
+    font-size: 14px;
   }
   .challenge--button, .challenge--button--clicked {
     width: 2rem;
     height: 2rem;
   }
-  .interlude--timer {
-    bottom: 5%;
-    right: 10%;
-  }
 }
 
 @media (max-width: 400px) {
   * {
-    font-size: 10px
+    font-size: 12px
   }
   .instructions--challenge > img {
     width: 1.5rem;

@@ -79,9 +79,11 @@ function TriviaCard() {
       });
     }
 
+    console.log(quizType.contestants)
+
     function handleClick(e) {
       let newTurn
-      if(result.turn === 1) {
+      if(result.turn === 1 && quizType.contestants[0] === 2) {
         newTurn = 2
       }else {
         newTurn = 1

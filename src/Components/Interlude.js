@@ -1,4 +1,4 @@
-// import Timer from './Timer'
+import Timer from './Timer'
 import ResultSpan from './ResultSpan';
 import Challenges from './Challenges';
 
@@ -32,10 +32,10 @@ function Interlude({ item, index, upsideDown, setUpsideDown, needGlasses, setNee
               setNeedGlasses={setNeedGlasses} />}
             <h3 className='challenge--counter'>{totalChallenges - challenges} Challenges Remaining</h3>
             <ResultSpan status={result.status} result={result} />
+            <div className='interlude--timer'>
+              <Timer setResult={setResult} result={result} />
+            </div>
         </section>
-        <div className='interlude--timer'>
-          {/* <Timer setResult={setResult} result={result} /> */}
-        </div>
     </div>
   )
 }
