@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Instructions from './Instructions';
 import StartQuiz from './StartQuiz';
 import EndQuiz from './EndQuiz.js';
 import QuestionBlock from './QuestionBlock';
@@ -6,6 +7,16 @@ import QuestionBlock from './QuestionBlock';
 function TriviaCard() {
 
     const [questions, setQuestions] = useState([])
+
+    const [instructionsSeen, setInstructionsSeen] = useState(() => {
+      const saved = localStorage.getItem('instructionsSeen')
+      const initialValue = JSON.parse(saved)
+      return initialValue || false
+    })
+
+    useEffect(() => {
+      localStorage.setItem("instructionsSeen", instructionsSeen)
+    }, [instructionsSeen])
 
     const [result, setResult] = useState({
       questionNumber: 0,
@@ -137,7 +148,10 @@ function TriviaCard() {
     return (
       <section className="trivia--card">
         {(quizType.contestants[0] !== 1 && result.status === "Ongoing") && <span>Player {result.turn}</span>}
-        {result.status === 'Ongoing' ? 
+        {!instructionsSeen ? 
+          <Instructions 
+            setInstructionsSeen={setInstructionsSeen} /> : 
+            result.status === 'Ongoing' ? 
           <QuestionBlock 
             questions={questions}
             quizType={quizType}

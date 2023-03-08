@@ -135,6 +135,41 @@ button {
   font-family: pixel;
 }
 
+.instructions {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100%;
+  overflow-y: scroll;
+  padding: 1rem;
+}
+
+.instructions > div > p {
+  align-self: flex-start;
+  margin-bottom: .5rem;
+}
+
+.instructions--challenge {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  padding: 1rem;
+}
+
+.instructions--challenge > img {
+  border: none;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  outline: 1px solid black;
+  margin-right: 1rem;
+}
+
+.instructions > button {
+  align-self: flex-end;
+}
+
 .card--body {
   display: flex;
   flex-direction: column;
@@ -371,5 +406,15 @@ button {
   .interlude--timer {
     bottom: 5%;
     right: 10%;
+  }
+}
+
+@media (max-width: 400px) {
+  * {
+    font-size: 10px
+  }
+  .instructions--challenge > img {
+    width: 1.5rem;
+    height: 1.5rem;
   }
 }
