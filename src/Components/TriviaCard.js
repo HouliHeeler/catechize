@@ -79,8 +79,6 @@ function TriviaCard() {
       });
     }
 
-    console.log(quizType.contestants)
-
     function handleClick(e) {
       let newTurn
       if(result.turn === 1 && quizType.contestants[0] === 2) {

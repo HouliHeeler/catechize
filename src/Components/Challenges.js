@@ -61,31 +61,31 @@ function Challenges({ setPlayerOneChallenges, setPlayerTwoChallenges, upsideDown
     }
     return (
         <div className='challenge--buttons'>
-            <button
+            <div
                 id="redacted"
                 onClick={(e) => {setRedacted(prevState => !prevState); handleChallenges(e.target.parentNode.id)}} 
                 className={redacted ? 'challenge--button--clicked' : 'challenge--button'} >
                   <img src={Classified} alt="Classified" />
-            </button>
-            <button
+            </div>
+            <div
                 id="upsideDown"
                 onClick={(e) => {setUpsideDown(prevState => !prevState); handleChallenges(e.target.parentNode.id)}} 
                 className={upsideDown ? 'challenge--button--clicked' : 'challenge--button'} >
                   <img src={UpsideDown} alt="Classified" />
-            </button>
+            </div>
             {quizType.timer[0] !== 'none' && 
-                <button 
+                <div 
                     id="thinkFast"
                     onClick={(e) => {setThinkFast(prevState => !prevState); handleChallenges(e.target.parentNode.id)}} 
                     className={thinkFast ? 'challenge--button--clicked' : 'challenge--button'}>
                       <img src={AlarmClock} alt="Alarm Clock" />
-                </button>}
-            <button 
+                </div>}
+            <div 
                 id="needGlasses"
                 onClick={(e) => {setNeedGlasses(prevState => !prevState); handleChallenges(e.target.parentNode.id)}} 
                 className={needGlasses ? 'challenge--button--clicked' : 'challenge--button'}>
                   <img src={Binoculars} alt="Binoculars" />
-            </button>
+            </div>
         </div>
     )
 }
