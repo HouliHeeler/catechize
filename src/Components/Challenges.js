@@ -46,9 +46,9 @@ function Challenges({ setPlayerOneChallenges, setPlayerTwoChallenges, upsideDown
                 }
             }else if(e === 'upsideDown') {
                 if(upsideDown) {
-                    setPlayerTwoChallenges(prevTotal => prevTotal - 1)
+                    setPlayerOneChallenges(prevTotal => prevTotal - 1)
                 }else {
-                    setPlayerTwoChallenges(prevTotal => prevTotal + 1)
+                    setPlayerOneChallenges(prevTotal => prevTotal + 1)
                 }
             }else {
                 if(needGlasses) {
@@ -73,7 +73,7 @@ function Challenges({ setPlayerOneChallenges, setPlayerTwoChallenges, upsideDown
                 className={upsideDown ? 'challenge--button--clicked' : 'challenge--button'} >
                   <img src={UpsideDown} alt="Classified" />
             </button>
-            {quizType.timer !== 'none' && 
+            {quizType.timer[0] !== 'none' && 
                 <button 
                     id="thinkFast"
                     onClick={(e) => {setThinkFast(prevState => !prevState); handleChallenges(e.target.parentNode.id)}} 

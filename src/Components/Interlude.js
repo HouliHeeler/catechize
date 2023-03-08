@@ -10,11 +10,13 @@ function Interlude({ item, index, upsideDown, setUpsideDown, needGlasses, setNee
     challenges = playerOneChallenges
   }
 
+  const totalChallenges = quizType.numberOfQuestions/2.5
+
   return (
     <div className="interlude--body">
         <section className="card--body" key={index}>
             <div className="card--question">{item.question}</div>
-            {challenges <  quizType.numberOfQuestions/2.5 ? 
+            {challenges <  totalChallenges && 
             <Challenges 
               quizType={quizType}
               result={result}
@@ -27,7 +29,8 @@ function Interlude({ item, index, upsideDown, setUpsideDown, needGlasses, setNee
               upsideDown={upsideDown}
               setUpsideDown={setUpsideDown}
               needGlasses={needGlasses}
-              setNeedGlasses={setNeedGlasses} /> : <span>No Challenges Left!</span>}
+              setNeedGlasses={setNeedGlasses} />}
+            <h3 className='challenge--counter'>{totalChallenges - challenges} Challenges Remaining</h3>
             <ResultSpan status={result.status} result={result} />
         </section>
         <div className='interlude--timer'>

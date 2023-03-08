@@ -32,7 +32,8 @@ function StartQuiz({ startQuiz, setQuizType }) {
         <Select 
           className="individual--option"
           separator="true"
-          onChange={handleMulti} 
+          onChange={handleMulti}
+          keepSelectedInList={false}
           options={categories} 
           multi='true'
           placeholder="Categories" />
