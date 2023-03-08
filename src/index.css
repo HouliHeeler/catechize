@@ -316,11 +316,6 @@ button {
   justify-content: space-evenly;
 }
 
-.challenge--buttons > div {
-  cursor: pointer;
-  padding: .25rem;
-}
-
 .challenge--buttons > div > img {
   max-height: 100%;
   max-width: 100%;
@@ -335,6 +330,8 @@ button {
   border-radius: 50%;
   outline: 1px solid black;
   box-shadow: 5px 5px #ff48c4;
+  cursor: pointer;
+  padding: .25rem;
 }
 
 .challenge--button--clicked {
