@@ -17,28 +17,36 @@ function TriviaCard() {
     })
 
     const [quizType, setQuizType] = useState({
-      contestants: 1,
+      contestants: [1],
       category: '',
       numberOfQuestions: 10,
       difficulty: 'hard',
       timer: [20]
     })
 
-    const [challenges, setChallenges] = useState(() => {
-      const saved = sessionStorage.getItem('challenges')
+    const [playerOneChallenges, setPlayerOneChallenges] = useState(() => {
+      const saved = sessionStorage.getItem('playerOneChallenges')
+      const initialValue = JSON.parse(saved)
+      return initialValue || 0
+    })
+
+    const [playerTwoChallenges, setPlayerTwoChallenges] = useState(() => {
+      const saved = sessionStorage.getItem('playerTwoChallenges')
       const initialValue = JSON.parse(saved)
       return initialValue || 0
     })
   
     useEffect(() => {
       if(result.status === 'Start') {
-        setChallenges(0)
+        setPlayerOneChallenges(0)
+        setPlayerTwoChallenges(0)
       }
     }, [result.status])
   
     useEffect(() => {
-      sessionStorage.setItem("challenges", challenges)
-    }, [challenges])
+      sessionStorage.setItem("playerOneChallenges", playerOneChallenges)
+      sessionStorage.setItem("playerTwoChallenges", playerTwoChallenges)
+    }, [playerOneChallenges, playerTwoChallenges])
 
     async function getQuestions() {
       await fetch(`https://the-trivia-api.com/api/questions?limit=${quizType.numberOfQuestions*quizType.contestants}&difficulty=${quizType.difficulty}&categories=${quizType.category}`, {
@@ -113,7 +121,7 @@ function TriviaCard() {
         text: '',
         status: 'Start',
         turn: 1,
-        interlude: false,
+        interlude: true,
         correctArray: []
       }))
       setQuizType(({
@@ -128,13 +136,15 @@ function TriviaCard() {
 
     return (
       <section className="trivia--card">
-        {(quizType.contestants[0] !== 1 && quizType.contestants !== 1) && <span>Player {result.turn}</span>}
+        {(quizType.contestants[0] !== 1 && result.status === "Ongoing") && <span>Player {result.turn}</span>}
         {result.status === 'Ongoing' ? 
           <QuestionBlock 
             questions={questions}
             quizType={quizType}
-            challenges={challenges}
-            setChallenges={setChallenges}
+            playerOneChallenges={playerOneChallenges}
+            setPlayerOneChallenges={setPlayerOneChallenges}
+            playerTwoChallenges={playerTwoChallenges}
+            setPlayerTwoChallenges={setPlayerTwoChallenges}
             result={result}
             setResult={setResult} 
             handleClick={handleClick}/> : 

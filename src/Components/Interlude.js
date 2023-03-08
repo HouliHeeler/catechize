@@ -1,19 +1,33 @@
 import Timer from './Timer'
 import ResultSpan from './ResultSpan';
-import Classified from '../app/classified.png'
-import AlarmClock from '../app/alarmclock.png'
-import Binoculars from '../app/binoculars.png'
+import Challenges from './Challenges';
 
-function Interlude({ item, index, needGlasses, setNeedGlasses, redacted, setRedacted, thinkFast, setThinkFast, setResult, result, quizType, challenges, setChallenges }) {
+function Interlude({ item, index, upsideDown, setUpsideDown, needGlasses, setNeedGlasses, redacted, setRedacted, thinkFast, setThinkFast, result, setResult, quizType, playerOneChallenges, setPlayerOneChallenges, playerTwoChallenges, setPlayerTwoChallenges }) {
+  let challenges;
+  if(result.turn === 1) {
+    challenges = playerTwoChallenges
+  }else {
+    challenges = playerOneChallenges
+  }
+
   return (
     <div className="interlude--body">
         <section className="card--body" key={index}>
             <div className="card--question">{item.question}</div>
-            {challenges < quizType.numberOfQuestions/2.5 ? <div className='challenge--buttons'>
-              <button onClick={() => {setRedacted(true); setChallenges(prevTotal => prevTotal + 1)}} className={redacted ? 'challenge--button--clicked' : 'challenge--button'} ><img src={Classified} alt="Classified" /></button>
-              <button onClick={() => {setThinkFast(true); setChallenges(prevTotal => prevTotal + 1)}} className={thinkFast ? 'challenge--button--clicked' : 'challenge--button'}><img src={AlarmClock} alt="Alarm Clock" /></button>
-              <button onClick={() => {setNeedGlasses(true); setChallenges(prevTotal => prevTotal + 1)}} className={needGlasses ? 'challenge--button--clicked' : 'challenge--button'}><img src={Binoculars} alt="Binoculars" /></button>
-            </div> : <span>No Challenges Left!</span>}
+            {challenges <  quizType.numberOfQuestions/2.5 ? 
+            <Challenges 
+              quizType={quizType}
+              result={result}
+              setPlayerOneChallenges={setPlayerOneChallenges} 
+              setPlayerTwoChallenges={setPlayerTwoChallenges}
+              redacted={redacted} 
+              setRedacted={setRedacted} 
+              thinkFast={thinkFast}
+              setThinkFast={setThinkFast}
+              upsideDown={upsideDown}
+              setUpsideDown={setUpsideDown}
+              needGlasses={needGlasses}
+              setNeedGlasses={setNeedGlasses} /> : <span>No Challenges Left!</span>}
             <ResultSpan status={result.status} result={result} />
         </section>
         <div className='interlude--timer'>
