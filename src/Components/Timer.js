@@ -1,6 +1,7 @@
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 
 function Timer({ thinkFast, setResult, quizType, result, handleClick }) {
+    //Ends interlude and moves on to QuestionRound
     function endInterlude() {
         setResult(prevResult => ({
             ...prevResult,
@@ -8,9 +9,11 @@ function Timer({ thinkFast, setResult, quizType, result, handleClick }) {
         }))
     }
 
+    //Sets allotted time for Interlude to 5 seconds, QuestionRound to quizType.timer(selected in StartQuiz), or halves it based on ThinkFast challenge
     let maxTime;
     result.interlude ? maxTime = 5 : thinkFast ? maxTime = (quizType.timer/2) : maxTime = quizType.timer
 
+    //Uses react-countdown-circle-timer framework
     return (
         <div className='timer'>
             <CountdownCircleTimer

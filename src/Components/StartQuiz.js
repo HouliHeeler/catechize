@@ -3,6 +3,7 @@ import { players, number, categories, difficulty, timer } from '../constants'
 
 function StartQuiz({ startQuiz, setQuizType }) {
 
+  //Updates state based on user selection in every option except Categories
   function handleChange(e) {
     setQuizType(prevState => ({
       ...prevState,
@@ -10,6 +11,7 @@ function StartQuiz({ startQuiz, setQuizType }) {
     }))
   }
 
+  //Updates categories selection
   function handleMulti(e) {
     if(e.length === 0) {
       setQuizType(prevState => ({
@@ -26,6 +28,7 @@ function StartQuiz({ startQuiz, setQuizType }) {
     }
   }
 
+  //Uses data from Constants and react-select-dropdown to fill out quiz options
   return (
     <section className="start--quiz">
       <div className="start--options">

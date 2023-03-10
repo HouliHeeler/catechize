@@ -3,6 +3,8 @@ import ResultSpan from './ResultSpan';
 import Challenges from './Challenges';
 
 function Interlude({ item, index, upsideDown, setUpsideDown, needGlasses, setNeedGlasses, redacted, setRedacted, thinkFast, setThinkFast, result, setResult, quizType, playerOneChallenges, setPlayerOneChallenges, playerTwoChallenges, setPlayerTwoChallenges }) {
+  
+  //Sets which players challenges are to be displayed
   let challenges;
   if(result.turn === 1) {
     challenges = playerTwoChallenges

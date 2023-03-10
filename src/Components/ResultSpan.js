@@ -1,7 +1,7 @@
 import { FaCheck, FaSkullCrossbones } from 'react-icons/fa';
 
 function ResultSpan({ result, status }) {
-
+    //Adds a Correct or Incorrect note to the Interlude section
     return (
         <div>
             {result["text"] === 'Correct' && status === 'Ongoing' ?

@@ -26,6 +26,7 @@ function QuestionBlock({ questions, handleClick, result, setResult, playerOneCha
       setUpsideDown(false)
     }, [result.questionNumber])
 
+    //Returns either QuestionRound or Interlude based on result.interlude
     const questionBlock = questions.map((item, index) => {
         return(
           <>

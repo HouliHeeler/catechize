@@ -12,9 +12,11 @@ function QuestionRound({ upsideDown, needGlasses, thinkFast, redacted, redactedN
              randomNumber === 3 ? 5 : 7
     }
 
+    //Amends styling based on challenges selected
     const answerMinimized = needGlasses ? 'need--glasses' : undefined
     const answerFlipped = upsideDown ? 'upside--down' : undefined
 
+    //Multiple choice options are laid out in consistent order, and then randomized by using the CSS Order designation
     return (
       <section className="card--body" key={index}>
         <div className="card--question">{item.question}</div>

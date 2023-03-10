@@ -1,5 +1,6 @@
 function EndQuiz({ result, quizType, questions, resetGame }) {
 
+  //Maps out answers for all of the quiz questions to be displayed at the end of the quiz
   const answers = questions.map((item, index) => {
     return (
       <div key={index} className="end--answers">
@@ -9,6 +10,7 @@ function EndQuiz({ result, quizType, questions, resetGame }) {
     )
   })
 
+  //Separates player one wins from player two wins
   const playerOneWins = result.correctArray.filter(el => el%quizType.contestants !== 0).length
   const playerTwoWins = result.correctArray.length - playerOneWins
 

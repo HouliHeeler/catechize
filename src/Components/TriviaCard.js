@@ -8,6 +8,7 @@ function TriviaCard() {
 
     const [questions, setQuestions] = useState([])
 
+    //Sets state for whether instructions are seen. Should be seen once per device.
     const [instructionsSeen, setInstructionsSeen] = useState(() => {
       const saved = localStorage.getItem('instructionsSeen')
       const initialValue = JSON.parse(saved)
@@ -18,6 +19,7 @@ function TriviaCard() {
       localStorage.setItem("instructionsSeen", instructionsSeen)
     }, [instructionsSeen])
 
+    //Sets state as an object containing a number of quiz result states
     const [result, setResult] = useState({
       questionNumber: 0,
       text: '',
@@ -27,6 +29,7 @@ function TriviaCard() {
       correctArray: []
     })
 
+    //Sets state as an object containing a number of quiz type states, chosen at StartQuiz
     const [quizType, setQuizType] = useState({
       contestants: [1],
       category: '',
@@ -35,6 +38,7 @@ function TriviaCard() {
       timer: [20]
     })
 
+    //Tracks player challenges remaining, saved in sessionStorage. Reset upon game reset or exiting browser.
     const [playerOneChallenges, setPlayerOneChallenges] = useState(() => {
       const saved = sessionStorage.getItem('playerOneChallenges')
       const initialValue = JSON.parse(saved)
@@ -59,6 +63,7 @@ function TriviaCard() {
       sessionStorage.setItem("playerTwoChallenges", playerTwoChallenges)
     }, [playerOneChallenges, playerTwoChallenges])
 
+    //Retrieves questions from the-trivia-api
     async function getQuestions() {
       await fetch(`https://the-trivia-api.com/api/questions?limit=${quizType.numberOfQuestions*quizType.contestants}&difficulty=${quizType.difficulty}&categories=${quizType.category}`, {
         headers: {
@@ -79,6 +84,7 @@ function TriviaCard() {
       });
     }
 
+    //Handles response to selecting an answer in the quiz accounting for many situations. Also used if timer runs out in a timed quiz.
     function handleClick(e) {
       let newTurn
       if(result.turn === 1 && quizType.contestants[0] === 2) {
@@ -126,6 +132,7 @@ function TriviaCard() {
             }))
     }
 
+    //Sets all states back to starting points
     function resetGame() {
       setResult(({
         questionNumber: 0,

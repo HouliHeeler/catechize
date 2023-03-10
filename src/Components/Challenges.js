@@ -4,6 +4,8 @@ import Binoculars from '../app/binoculars.png'
 import UpsideDown from '../app/upsideDown.png'
 
 function Challenges({ setPlayerOneChallenges, setPlayerTwoChallenges, upsideDown, setUpsideDown, redacted, setRedacted, thinkFast, setThinkFast, needGlasses, setNeedGlasses, result, quizType}) {
+    
+    //Function that updates remaining player challenges based on option selected/unselected
     function handleChallenges(e) {
         if(result.turn === 1) {
             if(e === 'redacted') {
@@ -59,6 +61,8 @@ function Challenges({ setPlayerOneChallenges, setPlayerTwoChallenges, upsideDown
             }   
         }
     }
+
+    //Challenge Buttons
     return (
         <div className='challenge--buttons'>
             <div
